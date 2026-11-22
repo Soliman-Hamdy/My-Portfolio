@@ -6,7 +6,7 @@ import { Download, Mail, MapPin } from "lucide-react";
 import ProfileImage from "@/components/ui/ProfileImage";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 
-const PROFILE_SRC = "/images/profile.jpg";
+const PROFILE_SRC = "/images/profile.jpeg";
 const PROFILE_ALT = "Soliman Hamdy";
 
 export default function HeroSection() {
