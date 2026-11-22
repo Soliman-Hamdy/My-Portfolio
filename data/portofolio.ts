@@ -47,7 +47,7 @@ export const projects: Project[] = [
       "Full-stack social platform where users create posts, like, comment, and chat in real time, built on a custom React front end and Node.js REST API.",
     tech: ["React", "Vite", "JavaScript", "Node.js"],
     image: "/projects/social-app.png",
-    live: "https://social-app-alpha-five.vercel.app/home",
+    live: "https://social-app-alpha-five.vercel.app/",
     github: "https://github.com/Soliman-Hamdy/Social-App",
   },
   {
