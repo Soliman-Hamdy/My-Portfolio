@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
+/* Lets you use dark: utilities later if you ever want them */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Light theme (values when <html> has no "dark" class) ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #faf8ff;
+  --surface: #ffffff;
+  --primary: #7c3aed;
+  --primary-light: #6d28d9;
+  --accent-cyan: #0891b2;
+  --accent-pink: #db2777;
+  --text: #1e1b3a;
+  --muted: #5b5675;
+  color-scheme: light;
 }
 
+/* ---------- Dark theme (default) ---------- */
+.dark {
+  --bg: #0f0b1e;
+  --surface: #1a1433;
+  --primary: #8b5cf6;
+  --primary-light: #c4b5fd;
+  --accent-cyan: #22d3ee;
+  --accent-pink: #f472b6;
+  --text: #f5f3ff;
+  --muted: #a5a0c0;
+  color-scheme: dark;
+}
+
+/* ---------- Tailwind tokens: bg-bg, text-muted, text-primary-light ... ---------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-pink: var(--accent-pink);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-poppins), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keeps section titles from hiding under the fixed navbar */
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    transition: none;
+  }
+}
+
+/* Gradient text */
+@utility gradient-text {
+  background-image: linear-gradient(
+    90deg,
+    var(--primary-light),
+    var(--accent-cyan),
+    var(--accent-pink)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Frosted glass card */
+@utility glass {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+/* Purple scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 999px;
 }
